@@ -1,0 +1,16 @@
+{
+  "name": "embedbot-util",
+  "version": "1.0.0",
+  "description": "",
+  "main": "deploy_commands.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.6.0"
+  }
+}

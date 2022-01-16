@@ -1,0 +1,54 @@
+<html>
+<head>
+	<title>EmbedBot</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Creates better embeds for some websites using slash commands">
+    <link id="favicon" rel="icon" href="icon.png" type="image/x-icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Social embed image -->
+    <meta property="og:image" content="https://embed-bot.vercel.app/icon.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1024">
+	<style>
+		*{
+			font-family: system-ui, sans-serif
+		}
+		.scrst{
+			max-width:300px;
+			width:100%
+		}
+		body{
+			color:#FFFFFF;
+  			background-color:#36393F;
+		}
+		a{
+			color:rgb(146, 180, 245)
+		}
+		a:hover{
+			color:rgb(195, 212, 245)
+		}
+	</style>
+</head>
+<body>
+	<div style="display:grid;grid-template-columns:80px 1fr;gap:10px;height:40px">
+		<div>
+			<img src="icon.png" style="width:100%">
+		</div>
+		<h1>EmbedBot</h1>
+	</div><br><br>
+	<h3 id=about>About</h3>
+	<p>
+		This simple Discord integration allows for easily creating embeds, using slash commands. Instead of<br>
+		<img class="scrst" src="img/default_embed.png"><br>
+		you get <br>
+		<img class="scrst" src="img/r_embed.png"><br>
+		Also supports images!
+	</p>
+	<h3 id=privacy>Privacy</h3>
+		EmbedBot does not capture nor retain any data from your discord server. It only has access to the reddit URL provided in the slash command.
+        It is hosted on Vercel, and you can view their privacy policy <a href="https://vercel.com/legal/privacy-policy">[here]</a>.
+	<hr>
+	<h1><a href="https://discord.com/api/oauth2/authorize?client_id=931591694175043664&permissions=0&scope=applications.commands">Invite!</a></h1>
+</body>
+</html>
