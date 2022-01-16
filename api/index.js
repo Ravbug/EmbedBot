@@ -78,7 +78,10 @@ const fetch = require('node-fetch');
     }
     else if (postcontent.hasOwnProperty("gallery_data")){
       response.data.embeds[0]["image"] = {}
-      response.data.embeds[0]["image"]["url"] = `https://i.redd.it/${postcontent["gallery_data"]["items"][0]["media_id"]}.jpg`
+      const firstGalleryID = postcontent["gallery_data"]["items"][0]["media_id"];
+      const firstGalleryMime = postcontent["media_metadata"][firstGalleryID]['m'];
+      const firstGalleryExt = firstGalleryMime.replace('image/','');
+      response.data.embeds[0]["image"]["url"] = `https://i.redd.it/${firstGalleryID}.${firstGalleryExt}`
       // indicate number of images
       response.data.embeds[0]["fields"] = []
       response.data.embeds[0]["fields"][0] = {
