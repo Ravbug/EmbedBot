@@ -72,7 +72,7 @@ const fetch = require('node-fetch');
       }
     };
      // add the image if there is one
-     if (postcontent["url"].includes("i.redd.it")){
+     if (postcontent["url"].includes(".jpg") || postcontent["url"].includes(".png")){
       response.data.embeds[0]["image"] = {}; 
       response.data.embeds[0]["image"]["url"] = postcontent["url"];
     }
