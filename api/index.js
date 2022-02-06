@@ -122,6 +122,7 @@ async function genericembed(options){
   const imgurl = dom.window.document.querySelector("[property~='og:image'][content]").content
   const authorname = dom.window.document.querySelector("[property~='og:site_name'][content]").content;
   const icon = dom.window.document.querySelector("[rel~='icon'][href]").href;
+  const date = dom.window.document.querySelector("[property~='article:published_time'][content]").content;
 
   const response = {
     type:4,
@@ -133,7 +134,7 @@ async function genericembed(options){
           url:fullurl,
           color:0x00AEFF,
           author:{
-            name:`${authorname} on [DATE]`,
+            name:`${authorname} on ${date}`,
             icon_url:icon
           },
           image:{
