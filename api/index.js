@@ -147,8 +147,8 @@ async function genericembed(options){
     data:{
       embeds:[
         {
-          title:title.substring(0,4095),
-          description:description.substring(0,4095),
+          title:title,
+          description:description,
           url:fullurl,
           color:0x00AEFF,
           author:{
