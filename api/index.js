@@ -111,6 +111,9 @@ async function genericembed(options){
       },
     }
   }
+  if (fullurl.includes("reddit.com")){
+    return await reddit(options);
+  }
 
   // load jsdom
   const jsdom = require("jsdom");
