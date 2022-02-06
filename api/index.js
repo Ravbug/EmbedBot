@@ -132,6 +132,13 @@ async function genericembed(options){
           color:0x00AEFF,
           image:{
             url:imgurl
+          },
+          author:{
+            name:`author name`,
+            icon_url:"nothing"
+          },
+          footer:{
+            text:`a footer`
           }
         }
       ]
