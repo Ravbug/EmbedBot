@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 /**
  * Create a Reddit embed
  * @param {discord.Interaction} interaction 
- * @returns 
+ * @returns Discord Embed Object
  */
  async function reddit(options){
   const fullurl = options[0]["value"]
@@ -96,6 +96,50 @@ const fetch = require('node-fetch');
 }
 
 /**
+ * Generic "best-guess" embed, for when a site does not properly embed itself
+ * @param {discord.Interaction} options 
+ * @returns Discord Embed Object
+ */
+async function genericembed(options){
+  const fullurl = options[0]["value"]
+  if (!fullurl.includes("http")){
+    return{
+      type: 4,
+      data: {
+        content: ":x: Not a URL",
+        flags: 1<<6 //ephemeral
+      },
+    }
+  }
+
+  // load jsdom
+  const jsdom = require("jsdom");
+  const { JSDOM } = jsdom;
+  const dom = new JSDOM(await (await fetch(fullurl)).text());
+
+  const title = dom.window.document.querySelector('title').textContent;
+  const description = dom.window.document.querySelector('[name~=description][content]').textContent;
+
+  const response = {
+    type:4,
+    data:{
+      embeds:[
+        {
+          title:title.substring(0,4095),
+          description:description.substring(0,4095),
+          url:fullurl,
+          color:0x00AEFF,
+          thumbnail:{
+            url:subData["data"]["header_img"]
+          }
+        }
+      ]
+    }
+  };
+  return response;
+}
+
+/**
  * @param {VercelRequest} request
  * @param {VercelResponse} response
  */
@@ -133,6 +177,9 @@ module.exports = async (request, response) => {
       switch (message.data.name.toLowerCase()) {
         case "reddit":   
           response.status(200).send(await reddit(message.data.options));
+          break;
+        case "embed":
+          response.status(200).send(await genericembed(message.data.options));
           break;
         default:
           response.status(400).send({ error: "Unknown Command" });
