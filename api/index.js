@@ -122,7 +122,13 @@ async function genericembed(options){
   const imgurl = dom.window.document.querySelector("[property~='og:image'][content]").content
   const authorname = dom.window.document.querySelector("[property~='og:site_name'][content]").content;
   const icon = dom.window.document.querySelector("[rel~='icon'][href]").href;
-  const date = dom.window.document.querySelector("[property~='article:published_time'][content]").content;
+  let date = dom.window.document.querySelector("[property~='article:published_time'][content]").content;
+  if (date){
+    date = new Date(date).toLocaleDateString();
+  }
+  else{
+    date = "";
+  }
 
   const response = {
     type:4,
@@ -134,7 +140,7 @@ async function genericembed(options){
           url:fullurl,
           color:0x00AEFF,
           author:{
-            name:`${authorname} on ${date}`,
+            name:`${authorname}${date}`,
             icon_url:icon
           },
           image:{
