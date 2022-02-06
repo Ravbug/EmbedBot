@@ -130,16 +130,16 @@ async function genericembed(options){
           description:description.substring(0,4095),
           url:fullurl,
           color:0x00AEFF,
-          image:{
-            url:imgurl
-          },
           author:{
             name:`author name`,
             icon_url:"nothing"
           },
           footer:{
             text:`a footer`
-          }
+          },
+          image:{
+            url:imgurl
+          },
         }
       ]
     }
