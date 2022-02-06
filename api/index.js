@@ -118,7 +118,8 @@ async function genericembed(options){
   const dom = new JSDOM(await (await fetch(fullurl)).text());
 
   const title = dom.window.document.querySelector('title').textContent;
-  const description = dom.window.document.querySelector('[name~=description][content]').textContent;
+  const description = dom.window.document.querySelector('[name~=description][content]').content;
+  const imgurl = dom.window.document.querySelector('[name~=og:image][content]').content
 
   const response = {
     type:4,
@@ -129,6 +130,9 @@ async function genericembed(options){
           description:description.substring(0,4095),
           url:fullurl,
           color:0x00AEFF,
+          image:{
+            url:imgurl
+          }
         }
       ]
     }
