@@ -121,7 +121,7 @@ async function genericembed(options){
   const description = dom.window.document.querySelector('[name~=description][content]').content;
   const imgurl = dom.window.document.querySelector("[property~='og:image'][content]").content
   const authorname = dom.window.document.querySelector("[property~='og:site_name'][content]").content;
-  const icon = dom.window.document.querySelector("[rel=~icon][href]").href;
+  const icon = dom.window.document.querySelector("[rel~='icon'][href]").href;
 
   const response = {
     type:4,
