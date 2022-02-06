@@ -134,9 +134,9 @@ async function genericembed(options){
   if (icon){
     icon = icon.href;
   }
-  let date = dom.window.document.querySelector("[property~='article:published_time'][content]").content;
+  let date = dom.window.document.querySelector("[property~='article:published_time'][content]");
   if (date){
-    date = ` on ${new Date(date).toLocaleDateString()}`;
+    date = ` on ${new Date(date.content).toLocaleDateString()}`;
   }
   else{
     date = "";
