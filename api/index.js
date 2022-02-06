@@ -162,6 +162,12 @@ async function genericembed(options){
       ]
     }
   };
+
+  if (!authorname){ 
+    // discord won't send the embed for some reason if this is not properly defined
+    response["data"]["embeds"][0]["author"] = undefined
+  }
+
   return response;
 }
 
