@@ -118,13 +118,25 @@ async function genericembed(options){
   const dom = new JSDOM(await (await fetch(fullurl)).text());
 
   const title = dom.window.document.querySelector('title').textContent;
-  const description = dom.window.document.querySelector('[name~=description][content]').content;
-  const imgurl = dom.window.document.querySelector("[property~='og:image'][content]").content
-  const authorname = dom.window.document.querySelector("[property~='og:site_name'][content]").content;
-  const icon = dom.window.document.querySelector("[rel~='icon'][href]").href;
+  let description = dom.window.document.querySelector('[name~=description][content]');
+  if (description){
+    description = description.content;
+  }
+  let imgurl = dom.window.document.querySelector("[property~='og:image'][content]");
+  if (imgurl){
+    imgurl = imgurl.content;
+  }
+  let authorname = dom.window.document.querySelector("[property~='og:site_name'][content]");
+  if (authorname){
+    authorname = authorname.content;
+  }
+  let icon = dom.window.document.querySelector("[rel~='icon'][href]");
+  if (icon){
+    icon = icon.href;
+  }
   let date = dom.window.document.querySelector("[property~='article:published_time'][content]").content;
   if (date){
-    date = new Date(date).toLocaleDateString();
+    date = ` on ${new Date(date).toLocaleDateString()}`;
   }
   else{
     date = "";
