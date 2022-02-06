@@ -129,9 +129,6 @@ async function genericembed(options){
           description:description.substring(0,4095),
           url:fullurl,
           color:0x00AEFF,
-          thumbnail:{
-            url:subData["data"]["header_img"]
-          }
         }
       ]
     }
