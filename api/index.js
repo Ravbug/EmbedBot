@@ -71,6 +71,12 @@ const fetch = require('node-fetch');
         ]
       }
     };
+
+    function addFieldData(){
+      if(response.data.embeds[0]["fields"] == undefined){
+        response.data.embeds[0]["fields"] = []
+      }
+    }
      // add the image if there is one
      if (postcontent["url"].includes(".jpg") || postcontent["url"].includes(".png")){
       response.data.embeds[0]["image"] = {}; 
@@ -83,7 +89,7 @@ const fetch = require('node-fetch');
       const firstGalleryExt = firstGalleryMime.replace('image/','');
       response.data.embeds[0]["image"]["url"] = `https://i.redd.it/${firstGalleryID}.${firstGalleryExt}`
       // indicate number of images
-      response.data.embeds[0]["fields"] = []
+      addFieldData();
       response.data.embeds[0]["fields"][0] = {
         name:"Gallery",
         value:`${postcontent["gallery_data"]["items"].length-1} more images in gallery`
@@ -92,13 +98,26 @@ const fetch = require('node-fetch');
 
     // flairs
     if (postcontent["link_flair_text"] != undefined && postcontent["link_flair_text"] != ""){
-      if(response.data.embeds[0]["fields"] == undefined){
-        response.data.embeds[0]["fields"] = []
-      }
+      addFieldData();
       response.data.embeds[0]["fields"].push({
         name: "Flair",
         value: postcontent["link_flair_text"]
       });
+    }
+
+    // is this a comment?
+    if (fullurl.includes("/comments/") && data[1]["data"]["children"].length > 0){
+      const commentcontent = data[1]["data"]["children"][0]["data"];
+      // add an additional embed
+      response.data.embeds.push({
+        title:"Reply",
+        description:commentcontent["body"],
+        url:fullurl,
+        author:{
+          name:`u/${commentcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
+          icon_url:"https://www.redditstatic.com/avatars/avatar_default_02_FF4500.png"
+        },
+      })
     }
 
     return response;
