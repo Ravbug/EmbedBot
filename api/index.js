@@ -113,10 +113,6 @@ const fetch = require('node-fetch');
         title:"Reply",
         description:commentcontent["body"],
         url:fullurl,
-        author:{
-          name:`u/${commentcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
-          icon_url:"https://www.redditstatic.com/avatars/avatar_default_02_FF4500.png"
-        },
       })
     }
 
