@@ -113,6 +113,8 @@ const fetch = require('node-fetch');
         title:"Reply",
         description:commentcontent["body"],
         url:fullurl,
+        color:0x00AEFF,
+        
       })
     }
 
