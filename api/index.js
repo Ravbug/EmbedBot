@@ -68,22 +68,6 @@ const fetch = require('node-fetch');
               text:`⬆ ✖ ${postcontent["score"]}           💬 ✖ ${postcontent["num_comments"]}`
             }
           },
-          {
-            title:postcontent["title"].substring(0,255),
-            description:postcontent["selftext"].substring(0,4095),
-            url:fullurl,
-            color:0x00AEFF,
-            thumbnail:{
-              url:subData["data"]["header_img"]
-            },
-            author:{
-              name:`u/${postcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
-              icon_url:subData["data"]["icon_img"]
-            },
-            footer:{
-              text:`⬆ ✖ ${postcontent["score"]}           💬 ✖ ${postcontent["num_comments"]}`
-            }
-          }
         ]
       }
     };
@@ -125,20 +109,28 @@ const fetch = require('node-fetch');
     if (fullurl.includes("/comments/") && data[1]["data"]["children"].length > 0){
       const commentcontent = data[1]["data"]["children"][0]["data"];
       // add an additional embed
+      // multiple embeds do not appear to work yet but this code is kept until they do
       response.data.embeds.push({
         title:"Reply",
         description:commentcontent["body"],
         url:fullurl,
         color:0x00AEFF,
-        
-      })
-    }
-/*
-author:{
+        author:{
           name:`u/${commentcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
           icon_url:"https://www.redditstatic.com/avatars/avatar_default_02_FF4500.png"
         },
-        */
+        footer:{
+          text:`⬆ ✖ ${commentcontent["score"]}`
+        }
+      })
+
+      // remove the below when multiple embeds are supported
+      addFieldData();
+      response.data.embeds[0]["fields"].push({
+        name: `Comment by u/${commentcontent["author"]} - ⬆ ✖ ${commentcontent["score"]}`,
+        value: commentcontent["body"]
+      });
+    }
     return response;
   }
   return await doit();
