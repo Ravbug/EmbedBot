@@ -67,6 +67,22 @@ const fetch = require('node-fetch');
             footer:{
               text:`⬆ ✖ ${postcontent["score"]}           💬 ✖ ${postcontent["num_comments"]}`
             }
+          },
+          {
+            title:postcontent["title"].substring(0,255),
+            description:postcontent["selftext"].substring(0,4095),
+            url:fullurl,
+            color:0x00AEFF,
+            thumbnail:{
+              url:subData["data"]["header_img"]
+            },
+            author:{
+              name:`u/${postcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
+              icon_url:subData["data"]["icon_img"]
+            },
+            footer:{
+              text:`⬆ ✖ ${postcontent["score"]}           💬 ✖ ${postcontent["num_comments"]}`
+            }
           }
         ]
       }
@@ -117,7 +133,12 @@ const fetch = require('node-fetch');
         
       })
     }
-
+/*
+author:{
+          name:`u/${commentcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
+          icon_url:"https://www.redditstatic.com/avatars/avatar_default_02_FF4500.png"
+        },
+        */
     return response;
   }
   return await doit();
