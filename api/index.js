@@ -81,7 +81,7 @@ const fetch = require('node-fetch');
      if (postcontent["url"].includes(".jpg") || postcontent["url"].includes(".png")){
       response.data.embeds[0]["image"] = {}; 
        if (postcontent["over_18"]){
-        response.data.embeds[0]["image"]["url"] = `${process.env.embed-bot.vercel.app}/not_safe.png`;
+        response.data.embeds[0]["image"]["url"] = `${process.env.VERCEL_URL}/not_safe.png`;
        }
        else{
         response.data.embeds[0]["image"]["url"] = postcontent["url"];
