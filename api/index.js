@@ -93,7 +93,12 @@ const fetch = require('node-fetch');
       const firstGalleryID = postcontent["gallery_data"]["items"][0]["media_id"];
       const firstGalleryMime = postcontent["media_metadata"][firstGalleryID]['m'];
       const firstGalleryExt = firstGalleryMime.replace('image/','');
-      response.data.embeds[0]["image"]["url"] = `https://i.redd.it/${firstGalleryID}.${firstGalleryExt}`
+      if (postcontent["over_18"]){
+        response.data.embeds[0]["image"]["url"] = `https://${process.env.VERCEL_URL}/img/not_safe.png`;
+      }
+      else{
+        response.data.embeds[0]["image"]["url"] = `https://i.redd.it/${firstGalleryID}.${firstGalleryExt}`
+      }
       // indicate number of images
       addFieldData();
       response.data.embeds[0]["fields"][0] = {
