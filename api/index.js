@@ -80,7 +80,13 @@ const fetch = require('node-fetch');
      // add the image if there is one
      if (postcontent["url"].includes(".jpg") || postcontent["url"].includes(".png")){
       response.data.embeds[0]["image"] = {}; 
-      response.data.embeds[0]["image"]["url"] = postcontent["url"];
+       if (postcontent["over_18"]){
+        response.data.embeds[0]["image"]["url"] = "https://i.imgur.com/UxowaaU.png";
+       }
+       else{
+        response.data.embeds[0]["image"]["url"] = postcontent["url"];
+       }
+      
     }
     else if (postcontent.hasOwnProperty("gallery_data")){
       response.data.embeds[0]["image"] = {}
