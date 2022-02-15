@@ -90,6 +90,17 @@ const fetch = require('node-fetch');
       }
     }
 
+    // flairs
+    if (postcontent["link_flair_text"] != undefined && postcontent["link_flair_text"] != ""){
+      if(response.data.embeds[0]["fields"] == undefined){
+        response.data.embeds[0]["fields"] = []
+      }
+      response.data.embeds[0]["fields"].push({
+        name: postcontent["link_flair_text"],
+        value: ""
+      });
+    }
+
     return response;
   }
   return await doit();
