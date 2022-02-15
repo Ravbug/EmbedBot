@@ -96,8 +96,8 @@ const fetch = require('node-fetch');
         response.data.embeds[0]["fields"] = []
       }
       response.data.embeds[0]["fields"].push({
-        name: postcontent["link_flair_text"],
-        value: ""
+        name: "Flair",
+        value: postcontent["link_flair_text"]
       });
     }
 
