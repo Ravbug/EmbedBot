@@ -117,7 +117,7 @@ const fetch = require('node-fetch');
     }
 
     // is this a comment?
-    if (fullurl.includes("/comment/") && data[1]["data"]["children"].length > 0){
+    if (data[1]["data"]["children"].length == 1){
       const commentcontent = data[1]["data"]["children"][0]["data"];
       // add an additional embed
       // multiple embeds do not appear to work yet but this code is kept until they do
