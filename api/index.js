@@ -127,8 +127,8 @@ const fetch = require('node-fetch');
       // remove the below when multiple embeds are supported
       addFieldData();
       response.data.embeds[0]["fields"].push({
-        name: `Comment by u/${commentcontent["author"]} - ⬆ ✖ ${commentcontent["score"]}`,
-        value: commentcontent["body"]
+        name: `Comment`,
+        value: `u/${commentcontent["author"]}\n${commentcontent["body"]}\n\n⬆ ✖ ${commentcontent["score"]}`
       });
     }
     return response;
