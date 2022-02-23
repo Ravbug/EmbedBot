@@ -172,10 +172,25 @@ async function genericembed(options){
   const { JSDOM } = jsdom;
   const dom = new JSDOM(await (await fetch(fullurl)).text());
 
-  const title = dom.window.document.querySelector('title').textContent;
+  let title = dom.window.document.querySelector('title');
+  if (title){
+    title = title.textContent;
+  }
+  else{
+    return{
+      type: 4,
+      data: {
+        content: ":x: Cannot embed - webpage does not have a title",
+        flags: 1<<6 //ephemeral
+      },
+    }
+  }
   let description = dom.window.document.querySelector('[name~=description][content]');
   if (description){
     description = description.content;
+  }
+  else{
+    description = "";
   }
   let imgurl = dom.window.document.querySelector("[property~='og:image'][content]");
   if (imgurl){
@@ -202,8 +217,8 @@ async function genericembed(options){
     data:{
       embeds:[
         {
-          title:title,
-          description:description,
+          title:title.substring(0,255),
+          description:description.substring(0,4095),
           url:fullurl,
           color:0x00AEFF,
           author:{
