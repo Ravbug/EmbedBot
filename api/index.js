@@ -181,12 +181,19 @@ async function genericembed(options){
     title = title.textContent;
   }
   else{
-    return{
-      type: 4,
-      data: {
-        content: ":x: Cannot embed - webpage does not have a title",
-        flags: 1<<6 //ephemeral
-      },
+    // try again:
+    title = dom.window.document.querySelector("[property~='og:site_name'][content]")
+    if (title){
+      title = title.content;
+    }
+    else{
+      return{
+        type: 4,
+        data: {
+          content: ":x: Cannot embed - webpage does not have a title",
+          flags: 1<<6 //ephemeral
+        },
+      }
     }
   }
   let description = dom.window.document.querySelector('[name~=description][content]');
