@@ -4,7 +4,7 @@
   "dependencies": {
     "discord-interactions": "2.0.2",
     "raw-body": "2.4.1",
-    "node-fetch": "2.0.0",
+    "node-fetch": "2.6.7",
     "jsdom" : "19.0.0"
   }
 }
