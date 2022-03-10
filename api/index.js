@@ -1,10 +1,3 @@
-const {
-  InteractionResponseType,
-  InteractionType,
-  verifyKey,
-} = require("discord-interactions");
-
-const getRawBody = require("raw-body");
 const fetch = require('node-fetch');
 
 /**
@@ -170,7 +163,18 @@ async function genericembed(options){
   // load jsdom
   const jsdom = require("jsdom");
   const { JSDOM } = jsdom;
-  const dom = new JSDOM(await (await fetch(fullurl)).text());
+  const re = await fetch(fullurl);
+  if (re.status != 200){
+    return{
+      type: 4,
+      data: {
+        content: `:x: Cannot embed - the webpage at ${fullurl} responded with status ${re.status} - ${re.statusText}`,
+        flags: 1<<6 //ephemeral
+      },
+    }
+  }
+  const str = await re.text();
+  const dom = new JSDOM(str);
 
   let title = dom.window.document.querySelector('title');
   if (title){
@@ -249,6 +253,13 @@ module.exports = async (request, response) => {
 
   // Only respond to POST requests
   if (request.method === "POST") {
+    const {
+      InteractionResponseType,
+      InteractionType,
+      verifyKey,
+    } = require("discord-interactions");
+    
+    const getRawBody = require("raw-body");
     // Verify the request (required for Discord API)
     const signature = request.headers["x-signature-ed25519"];
     const timestamp = request.headers["x-signature-timestamp"];

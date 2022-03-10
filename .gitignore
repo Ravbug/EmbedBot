@@ -1,3 +1,5 @@
 .DS_Store
 util/node_modules
 util/env.json
+node_modules/
+package-lock.json
