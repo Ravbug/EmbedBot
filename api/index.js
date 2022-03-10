@@ -207,6 +207,7 @@ async function genericembed(options){
   if (imgurl){
     imgurl = imgurl.content;
   }
+
   let authorname = dom.window.document.querySelector("[property~='og:site_name'][content]");
   if (authorname){
     authorname = authorname.content;
@@ -214,6 +215,13 @@ async function genericembed(options){
   let icon = dom.window.document.querySelector("[rel~='icon'][href]");
   if (icon){
     icon = icon.href;
+    // fixup icon url
+    if (icon.startsWith('//')){
+      icon = `http:${icon}`;
+    }
+    else if (icon.startsWith('/')){
+      icon = `http:/${icon}`;
+    }
   }
   let date = dom.window.document.querySelector("[property~='article:published_time'][content]");
   if (date){
@@ -314,3 +322,4 @@ module.exports = async (request, response) => {
     response.status(400).send({ error: "Not a POST request" });
   }
 };
+
