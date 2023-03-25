@@ -113,11 +113,10 @@ const fetch = require('node-fetch');
     if (data[1]["data"]["children"].length == 1){
       const commentcontent = data[1]["data"]["children"][0]["data"];
       // add an additional embed
-      // multiple embeds do not appear to work yet but this code is kept until they do
       response.data.embeds.push({
         title:"Reply",
         description:commentcontent["body"],
-        url:fullurl,
+        url:`${fullurl}?comment=1`,
         color:0x00AEFF,
         author:{
           name:`u/${commentcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
@@ -127,13 +126,6 @@ const fetch = require('node-fetch');
           text:`⬆ ✖ ${commentcontent["score"]}`
         }
       })
-
-      // remove the below when multiple embeds are supported
-      addFieldData();
-      response.data.embeds[0]["fields"].push({
-        name: `Comment`,
-        value: `u/${commentcontent["author"]}\n${commentcontent["body"]}\n\n⬆ ✖ ${commentcontent["score"]}`
-      });
     }
     return response;
   }
