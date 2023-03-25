@@ -110,7 +110,7 @@ const fetch = require('node-fetch');
     }
 
     // is this a comment?
-    if (data[1]["data"]["children"].length == 1){
+    if (fullurl.includes("/comment/")){
       const commentcontent = data[1]["data"]["children"][0]["data"];
       // add an additional embed
       response.data.embeds.push({
