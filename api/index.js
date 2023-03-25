@@ -114,9 +114,8 @@ const fetch = require('node-fetch');
       const commentcontent = data[1]["data"]["children"][0]["data"];
       // add an additional embed
       response.data.embeds.push({
-        title:"Reply",
         description:commentcontent["body"],
-        url:`${fullurl}?comment=1`,
+        url:`${fullurl}?comment=1`,   // see https://github.com/discord/discord-api-docs/issues/4129#issuecomment-974749409
         color:0x00AEFF,
         author:{
           name:`u/${commentcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
