@@ -118,7 +118,7 @@ const fetch = require('node-fetch');
         url:`${fullurl}?comment=1`,   // see https://github.com/discord/discord-api-docs/issues/4129#issuecomment-974749409
         color:0x00AEFF,
         author:{
-          name:`u/${commentcontent["author"]} on ${postcontent["subreddit_name_prefixed"]}`,
+          name:`Reply by u/${commentcontent["author"]}`,
           icon_url:"https://www.redditstatic.com/avatars/avatar_default_02_FF4500.png"
         },
         footer:{
