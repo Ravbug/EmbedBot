@@ -29,7 +29,7 @@ const fetch = require('node-fetch');
       return {
         type: 4,
         data: {
-          content: ":x: Reddit page not reachable",
+          content: `:x: Reddit page not reachable (code ${data.status})`,
           flags: 1<<6 //ephemeral
         },
       }
