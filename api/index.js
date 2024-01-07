@@ -25,7 +25,7 @@ const fetch = require('node-fetch');
   async function doit(){
     const url = `${trimTrailingChars(fullurl.split('?')[0],'/')}.json`
     let data = await fetch(url).catch(()=>{});
-    if (data.status != 200){
+    if (!data.ok){
       return {
         type: 4,
         data: {
